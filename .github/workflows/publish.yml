@@ -1,7 +1,7 @@
 name: Publish Docker image
 on: [push]
 env:
-  IMAGE_NAME: Img2Mol
+  IMAGE_NAME: img2mol
 jobs:
   publish-docker-image:
     runs-on: ubuntu-latest
