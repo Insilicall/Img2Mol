@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  app:
+    container_name: app
+    build: .
+    ports:
+      - 8892:8892
+    volumes:
+      - .:/app
