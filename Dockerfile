@@ -1,5 +1,5 @@
 FROM continuumio/miniconda3
-RUN apt-get -qq update && apt-get install curl unzip -y
+RUN apt-get -qq update && apt-get install curl -y
 
 # Create app directory
 WORKDIR /app
