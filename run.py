@@ -1,16 +1,18 @@
-from flask import Flask, jsonify, request
-from img2mol.inference import *
 import os
+import uuid
+from flask import Flask, request
+from img2mol.inference import *
 
 app = Flask(__name__)
 
 @app.route('/image_to_smiles/', methods=['POST'])
 def image_to_smiles():
-    file = request.files['file']
-    filepath = os.path.abspath(file.filename)
-    file.save(filepath)
-    device = "cpu"
-    img2mol = Img2MolInference(model_ckpt="model/model.ckpt", device=device)
+    image = request.files['image']
+    extension = image.filename.split(".")[-1]
+    file_path = os.path.abspath(str(uuid.uuid4()) + "." + extension)
+    image.save(file_path)
+    img2mol = Img2MolInference(model_ckpt="model/model.ckpt")
     cddd_server = CDDDRequest()
-    res = img2mol(filepath=filepath, cddd_server=cddd_server)
-    return jsonify(res['smiles'])
+    response = img2mol(filepath=file_path, cddd_server=cddd_server)
+    os.remove(file_path)
+    return response['smiles']
