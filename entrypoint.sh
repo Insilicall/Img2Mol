@@ -13,4 +13,5 @@ pip install .
 set -euo pipefail
 
 # exec the final command:
-exec python run.py
+export FLASK_APP=/app/run.py
+exec flask run -h 0.0.0.0 -p 4200
