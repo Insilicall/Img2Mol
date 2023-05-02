@@ -1,5 +1,5 @@
 FROM continuumio/miniconda3
-RUN apt-get -qq update && apt-get install libxrender1 libarchive-dev build-essential git  liblapack-dev libblas-dev  gfortran curl  -y
+RUN apt-get -qq update && apt-get install curl unzip -y
 
 # Create app directory
 WORKDIR /app
@@ -12,5 +12,11 @@ RUN bash download_model.sh
 
 # Installation
 RUN conda env create -f environment.local-cddd.yml
-RUN conda activate img2mol
-RUN pip install .
+
+# Make RUN commands use the new environment:
+RUN echo "conda activate img2mol" >> ~/.bashrc
+RUN echo "pip install ." >> ~/.bashrc
+SHELL ["/bin/bash", "--login", "-c"]
+
+# The code to run when container is started:
+ENTRYPOINT ["./entrypoint.sh"]
