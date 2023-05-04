@@ -1,5 +1,5 @@
 FROM continuumio/miniconda3
-RUN apt-get -qq update && apt-get install curl -y
+RUN apt-get -qq update && apt-get install unzip curl -y
 
 # Create app directory
 WORKDIR /app
@@ -12,6 +12,9 @@ RUN bash download_model.sh
 
 # Installation
 RUN conda env create -f environment.local-cddd.yml
+
+# Download CDDD Model
+RUN bash download_local_cddd.sh
 
 # Make RUN commands use the new environment:
 RUN echo "conda activate img2mol" >> ~/.bashrc
