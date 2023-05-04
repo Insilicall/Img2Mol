@@ -13,4 +13,4 @@ set -euo pipefail
 WEB_API_PORT="${WEB_API_PORT:=4200}"
 
 # exec the final command:
-exec python -m uvicorn web-api:app --reload --host 0.0.0.0 --port $WEB_API_PORT
+exec python -m uvicorn web-api:app --host 0.0.0.0 --port $WEB_API_PORT --workers 1

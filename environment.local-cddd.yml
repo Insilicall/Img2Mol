@@ -27,4 +27,5 @@ dependencies:
     - fastapi
     - uvicorn
     - python-multipart
+    - schedule
     - .
