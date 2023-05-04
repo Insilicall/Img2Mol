@@ -1,7 +1,5 @@
 import os
 import uuid
-# import schedule
-# import time
 from fastapi import FastAPI, File, UploadFile
 from img2mol.inference import *
 
@@ -21,16 +19,9 @@ async def image_to_smiles(image: UploadFile = File(...)):
     return response['smiles']
 
 def get_model():
+    global model_was_loaded
+    global model
     if model_was_loaded == False:
         model = Img2MolInference(model_ckpt="model/model.ckpt", local_cddd=True)
         model_was_loaded = True
-        print("model_was_loaded")
     return model
-
-# def deallocate_memory():
-#     print("Restarting app...")
-
-# schedule.every(1).minutes.do(deallocate_memory)
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
