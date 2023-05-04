@@ -19,10 +19,12 @@ dependencies:
   - torchaudio=0.7.0
   - pytorch=1.7.0
   - pytorch-lightning=1.0.8
-  - flask
   - pip:
     - https://github.com/jrwnter/cddd/archive/refs/tags/1.0.tar.gz
     - tensorflow==1.10.1
     - tensorboard==1.15
     - numpy==1.19.2
+    - fastapi
+    - uvicorn
+    - python-multipart
     - .
