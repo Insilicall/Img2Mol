@@ -4,7 +4,6 @@ on:
     # Publish 'main' as Docker 'latest' image.
     branches:
       - main
-      - feature/docker-image
 
     # Publish 'v1.2.3' tags as releases.
     tags:
